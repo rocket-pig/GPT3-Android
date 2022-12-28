@@ -6,7 +6,7 @@ and finally succeeded with this GPT-3 API project.
 <img height="300px" src="preview.gif"></img>
 
 
-The APK is available in [releases](releases/tag/final) or compile
+The APK is available in [releases](https://github.com/rocket-pig/GPT3-Android/releases/tag/final) or compile
 yourself with:
 
 Run build from top (this) dir with 
