@@ -3,13 +3,12 @@ used as platform for multiple exploratory attempts
 at making a more complete android app in javascript, 
 and finally succeeded with this GPT-3 API project. 
 
-![]( https://i.ibb.co/JjD47LF/recording-20221228-100202-1.gif )
-
+<img height="300px" src="preview.gif">
 The APK is available in [releases](releases/tag/final) or compile
 yourself with:
 
 Run build from top (this) dir with 
-./build.sh project/
+```./build.sh project/```
 
 ### Further Reading
 * [GPT-3 Wikipedia](https://en.wikipedia.org/wiki/GPT-3)
