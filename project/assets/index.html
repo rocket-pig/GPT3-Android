@@ -1,0 +1,260 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>OpenAI v4</title>
+  
+<!--<script src="js/eruda.min.js"></script>
+<script>eruda.init();</script> -->
+
+
+<script src="js/jquery.js"></script>
+<link id="maintheme" rel="stylesheet" href="">
+
+
+ 
+<link rel="stylesheet" href="lib/onsen/css/material-design-iconic-font/css/material-design-iconic-font.css">
+
+<link rel="stylesheet" href="lib/onsen/css/font_awesome/css/all.css">
+
+<link rel="stylesheet" href="lib/onsen/css/ionicons/css/ionicons.css">
+
+<link rel="lib/onsen/css/material-design-iconic-font/css/material-design-iconic-font.css">
+
+  <script src="lib/onsen/js/onsenui.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/controllers.js"></script>
+
+  
+</head>
+
+<body>
+  <!-- "First navigation component: Navigator. This will remain always on top of the app." -->
+  <!-- ...which is patently not true - if you dont define it at the top of every template, its not there, and everything from prior definition will land in a big pile in the upper left. corner. --->
+  <ons-navigator id="myNavigator" page="twopane.html">
+  </ons-navigator>
+
+
+<template id="twopane.html"> <!-- main twopane view-->
+
+
+<ons-page id="twopanePage">
+<ons-toolbar>
+    <div class="left">
+        <ons-toolbar-button id="settings_button">
+            <ons-icon icon="fa-bars">
+            </ons-icon>
+        </ons-toolbar-button>
+    </div>
+
+    <div class="center">GPT-3</div>
+    
+    <div class="right">
+        <ons-toolbar-button id="copyUp_button">
+        <ons-icon icon="fa-copy" >
+        </ons-icon>
+        </ons-toolbar-button>
+        <ons-toolbar-button id="savetostorage_button">
+        <ons-icon icon="fa-save"></ons-icon>
+        </ons-toolbar-button>
+        <ons-toolbar-button id="history_button">
+        <ons-icon icon="fa-paragraph"></ons-icon>
+        </ons-toolbar-button>
+    </div>
+</ons-toolbar>
+
+
+<div class="split-container" style="height: 100%;">
+  
+  <div class="split-pane" style="height: 60%">
+    <textarea id="edit-top" style="background-color: rgba(0,0,0,0);color: #FFFFFF;width: 100%;border-width: 0px;height: 100%;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;"></textarea>
+  </div>
+  
+  <div id="separator" style="color: #CD339;
+    width: 90%;
+    height: 1%;
+    border-radius: 50%;">
+  </div>
+  
+  <div class="split-pane" style="height: 38%">
+    <textarea id="edit-bottom" style="background-color: rgba(0,0,0,0);color: #FFFFFF;width: 100%;border-width: 0px;height: 100%;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;"></textarea>
+  </div>
+  
+</div> <!--end of split-container-->
+
+
+        <ons-fab id="noripple" position="right bottom" onclick="myApp.services.tasks.getSug()">
+          <ons-icon icon="fa-paper-plane"></ons-icon>
+        </ons-fab>
+  <script>document.querySelector("#noripple").removeAttribute("ripple")</script>
+
+</ons-page>
+</template>   <!-- end of main twopane view-->
+     
+     
+     
+<template id="settings.html"> <!-- settings view -->
+<ons-page id="settingsPage">
+
+<ons-toolbar>
+<div class="left"><ons-back-button id="menu">Main</ons-back-button></div>
+<div class="center">Settings</div>
+</ons-toolbar>
+
+<ons-list id="settingsList">
+
+    <ons-list-header>Model</ons-list-header>
+<ons-list-item id="selectedModel" expandable>
+  Tap to expand
+  <div class="expandable-content">
+  <ons-list-item onclick="myApp.services.settings.setModel('text-davinci-003')">text-davinci-003</ons-list-item>
+    <ons-list-item onclick="myApp.services.settings.setModel('text-davinci-002')">text-davinci-002</ons-list-item>
+
+  <ons-list-item onclick="myApp.services.settings.setModel('code-davinci-002')">code-davinci-002</ons-list-item>
+  <ons-list-item onclick="myApp.services.settings.setModel('code-cushman-001')">code-cushman-001</ons-list-item>
+  <ons-list-item onclick="myApp.services.settings.setModel('text-curie-001')">text-curie-001</ons-list-item>
+  <ons-list-item onclick="myApp.services.settings.setModel('text-babbage-001')">text-babbage-001</ons-list-item>
+  <ons-list-item onclick="myApp.services.settings.setModel('text-ada-001')">text-ada-001</ons-list-item>
+  </div> <!--end expandable-content -->
+</ons-list-item> <!-- end Model menu -->
+
+
+
+
+    <ons-list-header>Appearance</ons-list-header>
+    <ons-list-item>
+    <div class="center">
+     Font Size
+     </div>
+     <div class="right">
+     <ons-range min="6" max="20" step="1"></ons-range>
+     </div>
+     </ons-list-item>
+    <ons-list-item>
+      <div class="center">
+        Dark Theme
+      </div>
+      <div class="right">
+        <ons-switch id="darkSwitch" onclick="myApp.services.settings.swapTheme()"></ons-switch>
+      </div>
+    </ons-list-item>
+        <ons-list-item>
+      <div id="name" class="center">
+        God Mode
+      </div>
+      <div class="right">
+        <ons-switch id="godmodeSwitch"></ons-switch>
+      </div>
+    </ons-list-item>
+
+<ons-list-header>API Settings</ons-list-header>
+
+<ons-list-item>
+<div id="name">max_tokens</div>
+
+<ons-input id="max_tokens_input" modifier="none" class="right" onChange="function tmp() { localStorage.max_tokens=document.querySelector('#max_tokens_input').value };tmp(); "></ons-input>
+</ons-list-item>
+
+<ons-list-item>
+<div id="name">top_p</div>
+
+<ons-input id="top_p_input" modifier="none" class="right" onChange="function tmp() { localStorage.top_p=document.querySelector('#top_p_input').value };tmp(); "></ons-input>
+</ons-list-item>
+
+<ons-list-item>
+<div id="name">temperature</div>
+
+<ons-input id="temperature_input" modifier="none" class="right" onChange="function tmp() { localStorage.temperature=document.querySelector('#temperature_input').value };tmp(); "></ons-input>
+</ons-list-item>
+
+
+
+
+<ons-list-item>
+<ons-button id="noripples" modifier="large" onclick="myApp.services.tasks.setAPIKeyDialog()">Set API Key</ons-button>
+<script>
+//has to be done to all buttons, or else this default animation explodes it outward in the screen infinitely filling the world with button-meat
+
+document.querySelector("#noripples").removeAttribute("ripple")
+</script>
+</ons-list-item>
+
+
+</ons-list> <!-- end of whole settings list.-->
+
+
+<!-- cant put dialog guts in separate template i learned -->
+  <ons-dialog id="apikey_dialog">
+    <div style="text-align: center; padding: 10px;">
+      <p>
+      <ons-input id="apikey_input" modifier="none" ></ons-input>
+
+    </p>
+      <p><ons-button id="stop" onclick="myApp.services.tasks.writeAPIKeyToStorage()">Save</ons-button>
+      <script>document.querySelector("#stop").removeAttribute("ripple")</script>
+
+      <ons-button id="stopagain" onclick="myApp.services.tasks.hideAPIDialog()">Cancel</ons-button>
+      <script>document.querySelector("#stopagain").removeAttribute("ripple")</script>
+      
+</p>
+</div>
+</ons-dialog>
+
+
+</ons-page>
+
+
+
+
+
+
+
+</template> <!-- end of settings view -->
+      
+
+<template id="history.html">
+<ons-page class="page" id="historyPage" >
+
+
+
+<ons-toolbar>
+<div class="left"><ons-back-button id="menu">Main</ons-back-button></div>
+<div class="center">History</div>
+</ons-toolbar>
+
+
+<div class="background"></div>
+
+<div class="content" style="overflow:scroll">
+<ons-scroller>
+<ons-list id="history_is_now">
+</ons-list> 
+</ons-scroller>
+ </div> <!-- end o content -->
+
+
+</ons-page>
+</template> <!-- end of history.html -->
+      
+
+
+
+      
+<template id="loading.html"> <!-- loading page start -->      
+<ons-page id="loadingPage">      
+
+<ons-card>
+Loading...
+  <ons-progress-bar id="loading" value=""></ons-progress-bar>
+</ons-card>
+</ons-page>
+</template> <!-- loading page end -->
+
+
+
+
+</body>
+
+</html>
