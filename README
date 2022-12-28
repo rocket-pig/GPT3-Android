@@ -1,14 +1,17 @@
 My 'compile-apk-helloworld-in-termux' project was 
 used as platform for multiple exploratory attempts 
-at making an android app with javascript, and 
-finally succeeded with this GPT-3 API, using OnsenUI, 
-project. 
+at making a more complete android app in javascript, 
+and finally succeeded with this GPT-3 API project. 
 
-The APK is available in (LINK) 'releases' or compile
+<img src="https://i.ibb.co/JjD47LF/recording-20221228-100202-1.gif" align="center">
+
+
+The APK is available in https://github.com/rocket-pig/GPT3-Android/releases/tag/final'releases' or compile
 yourself with:
 
 Run build from top (this) dir with 
 ./build.sh project/
-  
 
+###Further Reading
+*
 
