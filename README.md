@@ -3,7 +3,9 @@ used as platform for multiple exploratory attempts
 at making a more complete android app in javascript, 
 and finally succeeded with this GPT-3 API project. 
 
-<img height="300px" src="preview.gif">
+<img height="300px" src="preview.gif"></img>
+
+
 The APK is available in [releases](releases/tag/final) or compile
 yourself with:
 
