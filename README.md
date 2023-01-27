@@ -12,6 +12,8 @@ yourself with:
 Run build from top (this) dir with 
 ```./build.sh project/```
 
+ALT-ENTER can be used as shortcut to send text instead of clicking the airplane.
+
 ### Further Reading
 * [GPT-3 Wikipedia](https://en.wikipedia.org/wiki/GPT-3)
 * [Get your OpenAI API Key](https://help.openai.com/en/articles/4936850-where-do-i-find-my-secret-api-key)
