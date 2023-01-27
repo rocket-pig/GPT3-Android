@@ -12,7 +12,12 @@ yourself with:
 Run build from top (this) dir with 
 ```./build.sh project/```
 
-ALT-ENTER can be used as shortcut to send text instead of clicking the airplane.
+### Buttons (from left to right)
+* Copy up: Copies response from GPT-3 up into the editing field. Good for quickly including response in next prompt.
+* Save: Saves contents of top text area to the History screen.
+* History: View saved histories. Theres buttons next to each saved blob - to load to main screen or delete.
+* If you're using an external keyboard, ALT-ENTER can be used as shortcut to send text instead of clicking the airplane.
+
 
 ### Further Reading
 * [GPT-3 Wikipedia](https://en.wikipedia.org/wiki/GPT-3)
